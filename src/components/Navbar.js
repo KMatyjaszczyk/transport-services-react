@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const Navbar = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
     const navigate = useNavigate()
@@ -6,6 +7,7 @@ const Navbar = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
     const handleLogout = () => {
         localStorage.removeItem('token')
         setUserIsLoggedIn(!userIsLoggedIn)
+        toast.success('User logged out')
         navigate('/login')
     }
 

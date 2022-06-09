@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.min.css";
 import Login from './components/Login';
+import Register from './components/Register';
 import About from './components/About'
 import Navbar from './components/Navbar';
 import Header from './components/Header';
@@ -20,11 +21,12 @@ function App() {
           <Route path='/*' exact element={<About />} />
           <Route path='/about' exact element={<About />} />
           <Route path='/login' exact element={<Login userIsLoggedIn={userIsLoggedIn} setUserIsLoggedIn={setUserIsLoggedIn} />} />
+          <Route path='/register' exact element={<Register/>} />
         </Routes>
         <Footer />
       </Router>
 
-      <ToastContainer />
+      <ToastContainer autoClose='4000' position='bottom-right'/>
     </>
   );
 }
