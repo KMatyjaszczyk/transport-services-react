@@ -1,11 +1,6 @@
-import Header from "./Header"
-import Navbar from "./Navbar"
-
 const Login = () => {
     return (
         <div>
-            <Navbar />
-            <Header />
             <div className="mx-xl-5 mx-lg-5 px-xl-5 px-lg-5">
                 <div className="mx-xl-5 mx-lg-5 px-xl-5 px-lg-5">
                     <div className="mx-xl-5 mx-lg-5 px-xl-5 px-lg-5">
