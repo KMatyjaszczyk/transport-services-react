@@ -1,3 +1,5 @@
+import Vehicles from "./Vehicles"
+
 const About = () => {
     return (
         <div>
@@ -77,14 +79,7 @@ const About = () => {
                                 We have a wide choice of vehicles, depending of number of passengers
                                 and customer's individual preferences.
                             </p>
-                            <ul className="list-group my-2">
-                                {/* TODO: dynamic list of vehicles here */}
-                                <li className="list-group-item">NEOPLAN Euroliner 51+1</li>
-                                <li className="list-group-item">RENAULT Carrier 35+25</li>
-                                <li className="list-group-item">VOLKSWAGEN LT 19+5</li>
-                                <li className="list-group-item">MERCEDES Sprinter 19+5</li>
-                                <li className="list-group-item">MERCEDES Sprinter 19+4</li>
-                            </ul>
+                            <Vehicles />
                         </div>
                     </div>
                 </div>
