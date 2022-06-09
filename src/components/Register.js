@@ -16,8 +16,7 @@ const Register = () => {
         const url = '/auth/register'
         const requestBody = {email: email, password: password}
 
-        await axios
-            .post(url, requestBody)
+        await axios.post(url, requestBody)
             .then((response) => {
                 console.log(response)
                 const message = `User with email ${email} succesfully registered`

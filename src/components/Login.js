@@ -15,8 +15,7 @@ const Login = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
         const url = '/auth/login'
         const requestBody = {username: email, password: password}
 
-        const response = await axios
-            .post(url, requestBody)
+        await axios.post(url, requestBody)
             .then((response) => {
                 console.log(response)
                 const token = response.data.jwt
