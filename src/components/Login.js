@@ -1,4 +1,36 @@
-const Login = () => {
+import { useState } from "react"
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const Login = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
+    const navigate = useNavigate()
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        
+        const url = '/auth/login'
+        const requestBody = {username: email, password: password}
+
+        const response = await axios
+            .post(url, requestBody)
+            .then((response) => {
+                console.log(response)
+                const token = response.data.jwt
+                localStorage.setItem('token', token)
+                setUserIsLoggedIn(!userIsLoggedIn)
+                navigate('/about')
+            })
+            .catch((error) => { 
+                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                toast.error(message)
+            })
+        
+    }
+
     return (
         <div>
             <div className="mx-xl-5 mx-lg-5 px-xl-5 px-lg-5">
@@ -12,14 +44,35 @@ const Login = () => {
                         <div className="mx-5 mb-5">
                             <form>
                                 <label className="form-label mb-2">Email</label>
-                                <input type="text" className="form-control mb-3" placeholder="Login" />
+                                <input 
+                                    type="text" 
+                                    className="form-control mb-3" 
+                                    placeholder="Login" 
+                                    defaultValue={email} 
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
 
                                 <label className="form-label mb-2">Password</label>
-                                <input type="password" className="form-control mb-3" placeholder="Hasło" />
+                                <input 
+                                    type="password" 
+                                    className="form-control mb-3" 
+                                    placeholder="Password" 
+                                    defaultValue={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
 
 
-                                <input type="submit" value="Login" className="btn btn-primary mt-3 mr-5" />
-                                <input type="submit" value="Sign up" className="btn btn-secondary mt-3 mx-3" />
+                                <input 
+                                    type="submit" 
+                                    className="btn btn-primary mt-3 mr-5" 
+                                    value="Login" 
+                                    onClick={handleLogin}
+                                />
+                                <input 
+                                    type="submit" 
+                                    className="btn btn-secondary mt-3 mx-3"
+                                    value="Sign up" 
+                                />
                             </form>
                         </div>
                     </div>
