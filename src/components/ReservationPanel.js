@@ -63,7 +63,7 @@ const ReservationPanel = () => {
                             <div className="mt-3">
                                 <button onClick={showCreate} className="btn btn-primary">Create reservation</button>
                             </div>
-                            <Reservations reservations={reservations} />
+                            <Reservations reservations={reservations} fetchReservations={fetchReservations} />
                         </>
                     }
                 </div>

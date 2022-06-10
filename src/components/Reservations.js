@@ -1,6 +1,6 @@
 import Reservation from "./Reservation"
 
-const Reservations = ({ reservations, setReservations }) => {
+const Reservations = ({ reservations, setReservations, fetchReservations }) => {
     return (
         <div className="mt-2 table-responsive">
             <table className="table">
@@ -13,7 +13,9 @@ const Reservations = ({ reservations, setReservations }) => {
                         <th>Status</th>
                         <th></th>
                     </tr>
-                    { reservations.map((reservation) => (<Reservation key={reservation.id} reservation={reservation} />)) }
+                    { reservations.map((reservation) => (
+                        <Reservation key={reservation.id} reservation={reservation} fetchReservations={fetchReservations} />
+                    )) }
                 </thead>
             </table>
         </div>
