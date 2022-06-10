@@ -60,7 +60,7 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
         setCustomerName('')
         setVehicleId('1')
         setDestination('')
-        setReservationType('')
+        setReservationType('WEDDING')
         setDepartureDate(moment(new Date()).format('YYYY-MM-DD'))
         setDepartureTime(moment(new Date()).format('HH:mm'))
 
