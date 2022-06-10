@@ -68,7 +68,7 @@ const ReservationPanel = () => {
                     }
                 </div>
             </div>
-            <CreateReservationModal createModalIsOpen={createModalIsOpen} hideCreate={hideCreate} />
+            <CreateReservationModal createModalIsOpen={createModalIsOpen} hideCreate={hideCreate} fetchReservations={fetchReservations} />
         </div>
     )
 }
