@@ -6,25 +6,25 @@ import Vehicle from "./Vehicle"
 const Vehicles = () => {
     const [vehicles, setVehicles] = useState([])
 
-    useEffect(() => {
-        const getVehicles = async () => {
-            const url = '/vehicles'
-            axios.get(url)
-                .then((response) => {
-                    setVehicles(response.data)
-                })
-                .catch((error) => {
-                    const message = error.response.data.message ? error.response.data.message : 'Unknown error'
-                    toast.error(message)
-                })
-        }
+    const fetchVehicles = async () => {
+        const url = '/vehicles'
+        axios.get(url)
+            .then((response) => {
+                setVehicles(response.data)
+            })
+            .catch((error) => {
+                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                toast.error(message)
+            })
+    }
 
-        getVehicles()
-    })
+    useEffect(() => {
+        fetchVehicles()
+    }, [])
 
     return (
         <ul className="list-group my-2">
-            {vehicles.map((vehicle) => (<Vehicle vehicle={vehicle}/>))}
+            {vehicles.map((vehicle) => (<Vehicle key={vehicle.id} vehicle={vehicle}/>))}
         </ul>
     )
 }

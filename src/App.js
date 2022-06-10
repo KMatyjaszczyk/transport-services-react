@@ -8,6 +8,7 @@ import About from './components/About'
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ReservationPanel from './components/ReservationPanel';
 
 function App() {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false)
@@ -22,6 +23,7 @@ function App() {
           <Route path='/about' exact element={<About />} />
           <Route path='/login' exact element={<Login userIsLoggedIn={userIsLoggedIn} setUserIsLoggedIn={setUserIsLoggedIn} />} />
           <Route path='/register' exact element={<Register/>} />
+          <Route path='/reservations' exact element={<ReservationPanel />}/>
         </Routes>
         <Footer />
       </Router>
