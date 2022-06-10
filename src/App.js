@@ -28,7 +28,7 @@ function App() {
         <Footer />
       </Router>
 
-      <ToastContainer autoClose='4000' position='bottom-right'/>
+      <ToastContainer autoClose='4000' position='bottom-right' pauseOnHover={false}/>
     </>
   );
 }
