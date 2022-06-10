@@ -2,11 +2,21 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import Reservations from "./Reservations"
+import CreateReservationModal from "./CreateReservationModal"
 
 const ReservationPanel = () => {
     const [reservations, setReservations] = useState([])
+    const [createModalIsOpen, setCreateModalIsOpen] = useState(false)
 
-    const fetchVehicles = async() => {
+    const showCreate = () => {
+        setCreateModalIsOpen(true);
+    }
+
+    const hideCreate = () => {
+        setCreateModalIsOpen(false);
+    }
+
+    const fetchReservations = async () => {
         const url = '/reservations/user'
         const token = localStorage.getItem('token')
         const config = {
@@ -16,7 +26,6 @@ const ReservationPanel = () => {
         }
         await axios.get(url, config)
             .then((response) => {
-                console.log(response)
                 setReservations(response.data)
             })
             .catch((error) => {
@@ -27,7 +36,7 @@ const ReservationPanel = () => {
     }
 
     useEffect(() => {
-        fetchVehicles()
+        fetchReservations()
     }, [])
 
     return (
@@ -41,15 +50,25 @@ const ReservationPanel = () => {
                     </div>
                 </section>
                 <div className="my-5">
-                { reservations.length === 0 ?
-                    <>
-                        <img className="rounded mx-auto d-block" src="/img/empty-state.png" alt="No reservations" />
-                        <p className="text-center">You have no reservations</p>
-                    </>
-                    : <Reservations reservations={reservations} />
-                }
+                    {reservations.length === 0 ?
+                        <>
+                            <img className="rounded mx-auto d-block" src="/img/empty-state.png" alt="No reservations" />
+                            <p className="text-center">You have no reservations</p>
+                            <div className="mt-3 text-center">
+                                <button onClick={showCreate} className="btn btn-primary">Create reservation</button>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <div className="mt-3">
+                                <button onClick={showCreate} className="btn btn-primary">Create reservation</button>
+                            </div>
+                            <Reservations reservations={reservations} />
+                        </>
+                    }
                 </div>
             </div>
+            <CreateReservationModal createModalIsOpen={createModalIsOpen} hideCreate={hideCreate} />
         </div>
     )
 }

@@ -24,7 +24,11 @@ const Vehicles = () => {
 
     return (
         <ul className="list-group my-2">
-            {vehicles.map((vehicle) => (<Vehicle key={vehicle.id} vehicle={vehicle}/>))}
+            {vehicles.map((vehicle) => (
+                <li key={vehicle.id} className="list-group-item">
+                    <Vehicle key={vehicle.id} vehicle={vehicle}/>
+                </li>
+            ))}
         </ul>
     )
 }
