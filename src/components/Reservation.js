@@ -1,9 +1,21 @@
+import { useState } from "react";
 import moment from "moment"
 import axios from "axios";
 import { FaTrashAlt, FaPencilAlt, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
+import UpdateReservationModal from "./UpdateReservationModal";
 
 const Reservation = ({ reservation, fetchReservations }) => {
+    const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false)
+
+    const showUpdate = () => {
+        setUpdateModalIsOpen(true)
+    }
+
+    const hideUpdate = () => {
+        setUpdateModalIsOpen(false)
+    }
+
     const date = Date.parse(reservation.departureDate)
     const formattedDate = moment(date).format('YYYY-MM-DD hh:mm')
 
@@ -57,10 +69,15 @@ const Reservation = ({ reservation, fetchReservations }) => {
             <td>{reservation.vehicle.brand}</td>
             <td>{reservation.status}</td>
             <td>
-                <FaPencilAlt role={'button'} className='mx-1' />
+                <FaPencilAlt role={'button'} onClick={showUpdate} className='mx-1' />
                 <FaTimes role={'button'} onClick={handleCancel} className='mx-1' />
                 <FaTrashAlt role={'button'} onClick={handleDelete} className='mx-1' />
             </td>
+            <UpdateReservationModal
+                reservation={reservation}
+                updateModalIsOpen={updateModalIsOpen}
+                hideUpdate={hideUpdate} 
+            />
         </tr>
     )
 }
