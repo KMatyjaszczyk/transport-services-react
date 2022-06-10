@@ -32,7 +32,7 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
     }, [])
 
     const handleCreateReservation = async () => {
-        const date = moment(departureDate + '' + departureTime, 'YYYY-MM-DD HH:mm').toDate()
+        const date = moment(departureDate + ' ' + departureTime, 'YYYY-MM-DD HH:mm').toDate()
         const token = localStorage.getItem('token')
         const url = '/reservations'
         const requestBody = {

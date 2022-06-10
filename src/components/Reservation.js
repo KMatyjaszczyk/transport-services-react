@@ -17,7 +17,7 @@ const Reservation = ({ reservation, fetchReservations }) => {
     }
 
     const date = Date.parse(reservation.departureDate)
-    const formattedDate = moment(date).format('YYYY-MM-DD hh:mm')
+    const formattedDate = moment(date).format('YYYY-MM-DD HH:mm')
 
     const handleCancel = async () => {
         console.log(`Cancel ${reservation.id}`)
@@ -77,6 +77,7 @@ const Reservation = ({ reservation, fetchReservations }) => {
                 reservation={reservation}
                 updateModalIsOpen={updateModalIsOpen}
                 hideUpdate={hideUpdate} 
+                fetchReservations={fetchReservations}
             />
         </tr>
     )

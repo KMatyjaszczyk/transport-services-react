@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap"
 import moment from "moment"
 import Vehicle from "./Vehicle"
 
-const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate }) => {
+const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fetchReservations }) => {
     const [vehicles, setVehicles] = useState([])
 
     const [customerName, setCustomerName] = useState(reservation.customerName)
@@ -31,13 +31,52 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate }) 
         fetchVehicles()
     }, [])
 
-    const handleUpdateReservation = () => {
+    const handleHideUpdate = () => {
+        setCustomerName(reservation.customerName)
+        setVehicleId(reservation.vehicle.id)
+        setDestination(reservation.destination)
+        setReservationType(reservation.type)
+        setDepartureDate(moment(reservation.departureDate).format('YYYY-MM-DD'))
+        setDepartureTime(moment(reservation.departureDate).format('HH:mm'))
+        
+        hideUpdate()
+    }
+
+    const handleUpdateReservation = async () => {
+        const date = moment(departureDate + ' ' + departureTime, 'YYYY-MM-DD HH:mm').toDate()
+        const token = localStorage.getItem('token')
         console.log('UPDATE')
         console.log(reservation)
+        const url = '/reservations'
+        const requestBody = {
+            id: reservation.id,
+            customerName: customerName,
+            vehicleId: vehicleId,
+            reservationType: reservationType,
+            departureDate: date,
+            destination: destination
+        }
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
+        await axios.put(url, requestBody, config)
+            .then((response) => {
+                toast.success(`Reservation to ${destination} updated`)
+
+                fetchReservations()
+                hideUpdate()
+            })
+            .catch((error) => {
+                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                toast.error(message)
+            })
     }
 
     return (
-        <Modal show={updateModalIsOpen} onHide={hideUpdate}>
+        <Modal show={updateModalIsOpen} onHide={handleHideUpdate}>
             <Modal.Header>
                 <Modal.Title>Update reservation</Modal.Title>
             </Modal.Header>
@@ -130,7 +169,7 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate }) 
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <button onClick={hideUpdate} className="btn btn-secondary">Cancel</button>
+                <button onClick={handleHideUpdate} className="btn btn-secondary">Cancel</button>
                 <button onClick={handleUpdateReservation} className="btn btn-primary">Update</button>
             </Modal.Footer>
         </Modal>
