@@ -47,6 +47,7 @@ const ReservationPanel = () => {
 
     useEffect(() => {
         fetchReservations()
+        // eslint-disable-next-line
     }, [])
 
     return (

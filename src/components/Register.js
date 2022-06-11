@@ -9,9 +9,36 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatedPassword, setRepeatedPassword] = useState('')
+    
+    const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+
+    const validateForm = () => {
+        const MIN_PASSWORD_LENGTH = 7
+        var result = ''
+
+        if (!emailPattern.test(email)) {
+            result += ('Wrong email address. ')
+        }
+
+        if (password.length < MIN_PASSWORD_LENGTH) {
+            result += ('Password is too short. ')
+        }
+
+        if (password !== repeatedPassword) {
+            result += ('Password does not match the repeated. ')
+        }
+
+        return result
+    }
 
     const handleRegister = async (e) => {
         e.preventDefault()
+
+        const validationResult = validateForm()
+        if (validationResult !== '') {
+            toast.error(validationResult)
+            return
+        }
 
         const url = '/auth/register'
         const requestBody = {email: email, password: password}

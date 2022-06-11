@@ -17,7 +17,6 @@ const Login = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
 
         await axios.post(url, requestBody)
             .then((response) => {
-                console.log(response)
                 const token = response.data.jwt
                 localStorage.setItem('token', token)
                 setUserIsLoggedIn(!userIsLoggedIn)
