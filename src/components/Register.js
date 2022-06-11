@@ -24,7 +24,6 @@ const Register = () => {
 
         await axios.post(url, requestBody)
             .then((response) => {
-                console.log(response)
                 const message = `User with email ${email} succesfully registered`
                 toast.success(message)
                 navigate('/login')
