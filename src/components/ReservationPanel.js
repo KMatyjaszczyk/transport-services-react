@@ -29,7 +29,11 @@ const ReservationPanel = () => {
         }
         await axios.get(url, config)
             .then((response) => {
-                setReservations(response.data)
+                const fetchedReservations = response.data
+                if (fetchedReservations.length > 0) {
+                    fetchedReservations.sort((a, b) => (a.creationDate > b.creationDate) ? -1 : ((b.creationDate > a.creationDate) ? 1 : 0))
+                }
+                setReservations(fetchedReservations)
             })
             .catch((error) => {
                 console.log(error)
