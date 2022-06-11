@@ -35,6 +35,12 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
     }, [])
 
     const handleCreateReservation = async () => {
+        const validationResult = validateForm()
+        if (validationResult !== '') {
+            toast.error(validationResult)
+            return
+        }
+
         const date = moment(departureDate + ' ' + departureTime, 'YYYY-MM-DD HH:mm').toDate()
         const token = localStorage.getItem('token')
         const url = '/reservations'
@@ -77,6 +83,29 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
                 const message = error.response.data.message ? error.response.data.message : 'Unknown error'
                 toast.error(message)
             })
+    }
+
+    const validateForm = () => {
+        const customerNamePattern = /^[A-ZĄĆĘŁŃÓŚŹŻa-ząćęłńóśźż][A-ZĄĆĘŁŃÓŚŹŻa-ząćęłńóśźż .&-]{2,}$/
+        const destinationPattern = /^[A-ZĄĆĘŁŃÓŚŹŻa-ząćęłńóśźż][A-ZĄĆĘŁŃÓŚŹŻa-ząćęłńóśźż .-]{2,}$/
+
+        var result = ''
+
+        if (!customerNamePattern.test(customerName)) {
+            result += 'Wrong customer name. '
+        }
+
+        if (!destinationPattern.test(destination)) {
+            result += 'Wrong destination. '
+        }
+
+        const date = moment(departureDate + ' ' + departureTime, 'YYYY-MM-DD HH:mm').toDate()
+        const currentDate = new Date()
+        if (date < currentDate) {
+            result += 'Cannot create reservation for the past. '
+        }
+
+        return result
     }
 
     return (
