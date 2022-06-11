@@ -9,18 +9,17 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatedPassword, setRepeatedPassword] = useState('')
-    
-    const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
 
     const validateForm = () => {
-        const MIN_PASSWORD_LENGTH = 7
+        const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+        const minPasswordLength = 7
         var result = ''
 
         if (!emailPattern.test(email)) {
             result += ('Wrong email address. ')
         }
 
-        if (password.length < MIN_PASSWORD_LENGTH) {
+        if (password.length < minPasswordLength) {
             result += ('Password is too short. ')
         }
 
