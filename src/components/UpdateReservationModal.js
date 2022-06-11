@@ -54,8 +54,6 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fe
 
         const date = moment(departureDate + ' ' + departureTime, 'YYYY-MM-DD HH:mm').toDate()
         const token = localStorage.getItem('token')
-        console.log('UPDATE')
-        console.log(reservation)
         const url = '/reservations'
         const requestBody = {
             id: reservation.id,
