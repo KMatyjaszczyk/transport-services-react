@@ -10,26 +10,6 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [repeatedPassword, setRepeatedPassword] = useState('')
 
-    const validateForm = () => {
-        const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-        const minPasswordLength = 7
-        var result = ''
-
-        if (!emailPattern.test(email)) {
-            result += ('Wrong email address. ')
-        }
-
-        if (password.length < minPasswordLength) {
-            result += ('Password is too short. ')
-        }
-
-        if (password !== repeatedPassword) {
-            result += ('Password does not match the repeated. ')
-        }
-
-        return result
-    }
-
     const handleRegister = async (e) => {
         e.preventDefault()
 
@@ -53,6 +33,26 @@ const Register = () => {
                 const message = error.response.data.message ? error.response.data.message : 'Unknown error'
                 toast.error(message)
             })
+    }
+
+    const validateForm = () => {
+        const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+        const minPasswordLength = 7
+        var result = ''
+
+        if (!emailPattern.test(email)) {
+            result += ('Wrong email address. ')
+        }
+
+        if (password.length < minPasswordLength) {
+            result += ('Password is too short. ')
+        }
+
+        if (password !== repeatedPassword) {
+            result += ('Password does not match the repeated. ')
+        }
+
+        return result
     }
 
     const handleSignIn = async (e) => {
