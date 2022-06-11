@@ -23,7 +23,6 @@ const Reservation = ({ reservation, fetchReservations }) => {
     const formattedDate = moment(date).format('YYYY-MM-DD HH:mm')
 
     const handleCancel = async () => {
-        console.log(`Cancel ${reservation.id}`)
         const url = `/reservations/${reservation.id}`
         const token = localStorage.getItem('token')
         const config = {
@@ -52,7 +51,6 @@ const Reservation = ({ reservation, fetchReservations }) => {
     }
 
     const handleDelete = async () => {
-        console.log(`Delete ${reservation.id}`)
         const url = `/reservations/${reservation.id}`
         const token = localStorage.getItem('token')
         const config = {
