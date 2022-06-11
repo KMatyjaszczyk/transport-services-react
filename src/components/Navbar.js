@@ -1,34 +1,34 @@
-import axios from "axios"
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import axios from "axios"
 
 const Navbar = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
     const navigate = useNavigate()
+
+    useEffect(() => {
+        validateToken()
+    })
 
     const validateToken = async () => {
         const token = localStorage.getItem('token')
         const url = '/auth/validate'
         const data = token ? token : ' '
-
-        let userIsLoggedIn = false
-
+    
+        let loggedIn = false
+    
         await axios.post(url, data)
             .then((response) => {
                 if (response.status === 200 && response.data.response === true) {
-                    userIsLoggedIn = true
+                    loggedIn = true
                     return
                 }
             })
             .catch((error) => {
                 console.error(error)
             })
-        setUserIsLoggedIn(userIsLoggedIn)
+        setUserIsLoggedIn(loggedIn)
     }
-
-    useEffect(() => {
-        validateToken()
-    })
 
     const handleLogout = () => {
         localStorage.removeItem('token')

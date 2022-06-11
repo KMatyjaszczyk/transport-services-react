@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 import Reservations from "./Reservations"
 import CreateReservationModal from "./CreateReservationModal"
 
 const ReservationPanel = () => {
     const [reservations, setReservations] = useState([])
     const [createModalIsOpen, setCreateModalIsOpen] = useState(false)
+
+    const navigate = useNavigate()
 
     const showCreate = () => {
         setCreateModalIsOpen(true);
@@ -29,7 +32,14 @@ const ReservationPanel = () => {
                 setReservations(response.data)
             })
             .catch((error) => {
-                console.error(error)
+                console.log(error)
+                if (error.response.status === 403) {
+                    toast.error('User is not logged in')
+                    localStorage.removeItem('token')
+                    navigate('/login')
+                    return
+                }
+
                 const message = error.response.data.message ? error.response.data.message : 'Unknown error'
                 toast.error(message)
             })

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { Modal } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 import moment from "moment"
 import Vehicle from "./Vehicle"
 
@@ -14,6 +15,8 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
     const [reservationType, setReservationType] = useState('WEDDING')
     const [departureDate, setDepartureDate] = useState(moment(new Date()).format('YYYY-MM-DD'))
     const [departureTime, setDepartureTime] = useState(moment(new Date()).format('HH:mm'))
+
+    const navigate = useNavigate()
 
     const fetchVehicles = async () => {
         const url = '/vehicles'
@@ -51,21 +54,29 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
         await axios.post(url, requestBody, config)
             .then((response) => {
                 toast.success('Reservation created')
+
+                setCustomerName('')
+                setVehicleId('1')
+                setDestination('')
+                setReservationType('WEDDING')
+                setDepartureDate(moment(new Date()).format('YYYY-MM-DD'))
+                setDepartureTime(moment(new Date()).format('HH:mm'))
+
+                fetchReservations()
+                hideCreate()
             })
             .catch((error) => {
+                console.log(error)
+                if (error.response.status === 403) {
+                    toast.error('User is not logged in')
+                    localStorage.removeItem('token')
+                    navigate('/login')
+                    return
+                }
+
                 const message = error.response.data.message ? error.response.data.message : 'Unknown error'
                 toast.error(message)
             })
-        
-        setCustomerName('')
-        setVehicleId('1')
-        setDestination('')
-        setReservationType('WEDDING')
-        setDepartureDate(moment(new Date()).format('YYYY-MM-DD'))
-        setDepartureTime(moment(new Date()).format('HH:mm'))
-
-        fetchReservations()
-        hideCreate()
     }
 
     return (

@@ -3,6 +3,7 @@ import moment from "moment"
 import axios from "axios";
 import { FaTrashAlt, FaPencilAlt, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import UpdateReservationModal from "./UpdateReservationModal";
 
 const Reservation = ({ reservation, fetchReservations }) => {
@@ -15,6 +16,8 @@ const Reservation = ({ reservation, fetchReservations }) => {
     const hideUpdate = () => {
         setUpdateModalIsOpen(false)
     }
+
+    const navigate = useNavigate()
 
     const date = Date.parse(reservation.departureDate)
     const formattedDate = moment(date).format('YYYY-MM-DD HH:mm')
@@ -35,6 +38,14 @@ const Reservation = ({ reservation, fetchReservations }) => {
                 fetchReservations()
             })
             .catch((error) => {
+                console.log(error)
+                if (error.response.status === 403) {
+                    toast.error('User is not logged in')
+                    localStorage.removeItem('token')
+                    navigate('/login')
+                    return
+                }
+
                 const message = error.response.data.message ? error.response.data.message : 'Unknown error'
                 toast.error(message)
             })
@@ -56,6 +67,14 @@ const Reservation = ({ reservation, fetchReservations }) => {
                 fetchReservations()
             })
             .catch((error) => {
+                console.log(error)
+                if (error.response.status === 403) {
+                    toast.error('User is not logged in')
+                    localStorage.removeItem('token')
+                    navigate('/login')
+                    return
+                }
+
                 const message = error.response.data.message ? error.response.data.message : 'Unknown error'
                 toast.error(message)
             })

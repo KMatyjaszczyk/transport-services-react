@@ -4,6 +4,7 @@ import { toast } from "react-toastify"
 import { Modal } from "react-bootstrap"
 import moment from "moment"
 import Vehicle from "./Vehicle"
+import { useNavigate } from "react-router-dom"
 
 const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fetchReservations }) => {
     const [vehicles, setVehicles] = useState([])
@@ -14,6 +15,8 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fe
     const [reservationType, setReservationType] = useState(reservation.type)
     const [departureDate, setDepartureDate] = useState(moment(reservation.departureDate).format('YYYY-MM-DD'))
     const [departureTime, setDepartureTime] = useState(moment(reservation.departureDate).format('HH:mm'))
+
+    const navigate = useNavigate()
 
     const fetchVehicles = async () => {
         const url = '/vehicles'
@@ -70,6 +73,14 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fe
                 hideUpdate()
             })
             .catch((error) => {
+                console.log(error)
+                if (error.response.status === 403) {
+                    toast.error('User is not logged in')
+                    localStorage.removeItem('token')
+                    navigate('/login')
+                    return
+                }
+
                 const message = error.response.data.message ? error.response.data.message : 'Unknown error'
                 toast.error(message)
             })
