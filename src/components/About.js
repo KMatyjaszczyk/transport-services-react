@@ -18,7 +18,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <div className="py-5 bg-image-full" style={{ backgroundImage: `url('img/sekcja1.jpg'` }}>
+            <div className="py-5" style={{ backgroundImage: `url('img/sekcja1.jpg'`, backgroundSize: "cover", backgroundPosition: "center" }}>
                 <div style={{ height: 20 + 'rem' }}></div>
             </div>
             <section className="py-5">
@@ -40,7 +40,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <div className="py-5 bg-image-full" style={{ backgroundImage: `url('img/sekcja2.jpg'` }}>
+            <div className="py-5" style={{ backgroundImage: `url('img/sekcja2.jpg'`, backgroundSize: "cover", backgroundPosition: "center" }}>
                 <div style={{ height: 20 + 'rem' }}></div>
             </div>
             <section className="py-5">
@@ -66,7 +66,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <div className="py-5 bg-image-full" style={{ backgroundImage: `url('img/sekcja3.jpg'` }}>
+            <div className="py-5" style={{ backgroundImage: `url('img/sekcja3.jpg'`, backgroundSize: "cover", backgroundPosition: "center" }}>
                 <div style={{ height: 20 + 'rem' }}></div>
             </div>
             <section className="py-5">
