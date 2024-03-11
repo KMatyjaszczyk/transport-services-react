@@ -8,16 +8,11 @@ let storedTheme = IS_SERVER ? 'light' : localStorage.getItem('theme');
 const arrayOfThemes = [
     { name: 'Light', icon: '☀️' },
     { name: 'Dark', icon: '🌙' },
-    { name: 'Auto', icon: '⚙️' },
-    // { name: 'Blue', icon: '🟦' }, //Add your own themes!
 ];
 
 //Modifies the html root element
 function modifyDOM(theme) {
-    if (
-        theme === 'auto' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.setAttribute('data-bs-theme', 'dark');
     } else {
         document.documentElement.setAttribute('data-bs-theme', theme);

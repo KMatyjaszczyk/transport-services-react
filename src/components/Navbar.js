@@ -39,7 +39,7 @@ const Navbar = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav className="navbar navbar-expand-lg bg-body fixed-top">
         <div className="container">
             <a className="navbar-brand" href="#!">
                 <img className="img-fluid" src="img/logo-small.png" alt="Small logo" /> Transport services
