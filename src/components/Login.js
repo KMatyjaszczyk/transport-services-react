@@ -2,9 +2,12 @@ import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import "../i18n"
+import { useTranslation } from "react-i18next";
 
 const Login = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -42,25 +45,25 @@ const Login = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
                     <div className="mx-xl-5 mx-lg-5 px-xl-5 px-lg-5">
                     <section className="py-4">
                             <div className="container">
-                                <h2>Sign in</h2>
+                                <h2>{t('login_signIn')}</h2>
                             </div>
                     </section>
                         <div className="mx-5 mb-5">
                             <form>
-                                <label className="form-label mb-2">Email</label>
+                                <label className="form-label mb-2">{t('login_email')}</label>
                                 <input 
                                     type="text" 
                                     className="form-control mb-3" 
-                                    placeholder="Login" 
+                                    placeholder={t('login_email')}
                                     defaultValue={email} 
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
 
-                                <label className="form-label mb-2">Password</label>
+                                <label className="form-label mb-2">{t('login_password')}</label>
                                 <input 
                                     type="password" 
                                     className="form-control mb-3" 
-                                    placeholder="Password" 
+                                    placeholder={t('login_password')}
                                     defaultValue={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -68,13 +71,13 @@ const Login = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
                                 <input 
                                     type="submit" 
                                     className="btn btn-primary mt-3 mr-5" 
-                                    value="Login" 
+                                    value={t("login_login")}
                                     onClick={handleLogin}
                                 />
                                 <input 
                                     type="submit" 
                                     className="btn btn-secondary mt-3 mx-3"
-                                    value="Sign up" 
+                                    value={t("login_signUp")}
                                     onClick={handleSignUp}
                                 />
                             </form>

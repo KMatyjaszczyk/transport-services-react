@@ -5,9 +5,12 @@ import { Modal } from "react-bootstrap"
 import moment from "moment"
 import Vehicle from "./Vehicle"
 import { useNavigate } from "react-router-dom"
+import "../i18n"
+import { useTranslation } from "react-i18next";
 
 const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fetchReservations }) => {
     const [vehicles, setVehicles] = useState([])
+    const { t } = useTranslation()
 
     const [customerName, setCustomerName] = useState(reservation.customerName)
     const [vehicleId, setVehicleId] = useState(reservation.vehicle.id)
@@ -116,20 +119,20 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fe
     return (
         <Modal show={updateModalIsOpen} onHide={handleHideUpdate}>
             <Modal.Header>
-                <Modal.Title>Update reservation</Modal.Title>
+                <Modal.Title>{t("updateReservationModal_title")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form>
-                    <label className="form-label mb-2">Customer or company name</label>
+                    <label className="form-label mb-2">{t("createReservationModal_nameLabel")}</label>
                     <input 
                         type='text' 
                         className="form-control mb-3"
-                        placeholder="Name" 
+                        placeholder={t("createReservationModal_namePlaceholder")}
                         defaultValue={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
                     />
 
-                    <label className="form-label mb-2">Vehicle</label>
+                    <label className="form-label mb-2">{t("createReservationModal_vehicleLabel")}</label>
                     <select 
                         className="form-select mr-sm-2 mb-3"
                         value={vehicleId}
@@ -141,52 +144,52 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fe
                                 </option>)}
                     </select>
 
-                    <label className="form-label mb-2">Journey destination</label>
+                    <label className="form-label mb-2">{t("createReservationModal_destinationLabel")}</label>
                     <input 
                         type='text' 
                         className="form-control mb-3" 
-                        placeholder="Destination" 
+                        placeholder={t("createReservationModal_destinationPlaceholder")}
                         defaultValue={destination}
                         onChange={(e) => setDestination(e.target.value)}
                     />
 
                     <div className="row">
-                        <span className="form-label mb-2">Journey type</span>
+                        <span className="form-label mb-2">{t("createReservationModal_journeyTypeLabel")}</span>
                     </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="type" value="WEDDING" 
                             checked={reservationType === 'WEDDING'}
                             onChange={(e) => setReservationType(e.target.value)} />
-                        <label className="form-check-label">Wedding</label>
+                        <label className="form-check-label">{t("createReservationModal_journeyTypeWedding")}</label>
                     </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="type" value="FUNERAL" 
                             checked={reservationType === 'FUNERAL'}
                             onChange={(e) => setReservationType(e.target.value)} />
-                        <label className="form-check-label">Funeral</label>
+                        <label className="form-check-label">{t("createReservationModal_journeyTypeFuneral")}</label>
                     </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="type" value="TRIP"
                             checked={reservationType === 'TRIP'} 
                             onChange={(e) => setReservationType(e.target.value)} />
-                        <label className="form-check-label">Trip</label>
+                        <label className="form-check-label">{t("createReservationModal_journeyTypeTrip")}</label>
                     </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="type" value="PILGRIMAGE" 
                             checked={reservationType === 'PILGRIMAGE'}
                             onChange={(e) => setReservationType(e.target.value)} />
-                        <label className="form-check-label">Pilgrimage</label>
+                        <label className="form-check-label">{t("createReservationModal_journeyTypePilgrimage")}</label>
                     </div>
                     <div className="form-check form-check-inline mb-3">
                         <input className="form-check-input" type="radio" name="type" value="OTHER" 
                             checked={reservationType === 'OTHER'}
                             onChange={(e) => setReservationType(e.target.value)} />
-                        <label className="form-check-label">Other</label>
+                        <label className="form-check-label">{t("createReservationModal_journeyTypeOther")}</label>
                     </div>
 
                     <div className="row">
                         <div className="col">
-                            <label className="form-label mb-2">Departure date</label>
+                            <label className="form-label mb-2">{t("createReservationModal_departureDateLabel")}</label>
                             <input 
                                 type="date" 
                                 className="form-control mb-3" 
@@ -195,7 +198,7 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fe
                             />
                         </div>
                         <div className="col">
-                            <label className="form-label mb-2">Hour</label>
+                            <label className="form-label mb-2">{t("createReservationModal_hourLabel")}</label>
                             <input 
                                 type="time" 
                                 className="form-control mb-3" 
@@ -207,8 +210,8 @@ const UpdateReservationModal = ({ reservation, updateModalIsOpen, hideUpdate, fe
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <button onClick={handleHideUpdate} className="btn btn-secondary">Cancel</button>
-                <button onClick={handleUpdateReservation} className="btn btn-primary">Update</button>
+                <button onClick={handleHideUpdate} className="btn btn-secondary">{t("createReservationModal_cancel")}</button>
+                <button onClick={handleUpdateReservation} className="btn btn-primary">{t("updateReservationModal_update")}</button>
             </Modal.Footer>
         </Modal>
     )

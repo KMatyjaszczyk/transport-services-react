@@ -4,10 +4,13 @@ import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import Reservations from "./Reservations"
 import CreateReservationModal from "./CreateReservationModal"
+import "../i18n"
+import { useTranslation } from "react-i18next";
 
 const ReservationPanel = () => {
     const [reservations, setReservations] = useState([])
     const [createModalIsOpen, setCreateModalIsOpen] = useState(false)
+    const { t } = useTranslation()
 
     const navigate = useNavigate()
 
@@ -60,7 +63,7 @@ const ReservationPanel = () => {
                 <section className="py-3">
                     <div className="mt-5">
                         <div className="container">
-                            <h2>Your reservations</h2>
+                            <h2>{t("reservationPanel_yourReservations")}</h2>
                         </div>
                     </div>
                 </section>
@@ -68,15 +71,15 @@ const ReservationPanel = () => {
                     {reservations.length === 0 ?
                         <>
                             <img className="rounded mx-auto d-block" src="/img/empty-state.png" alt="No reservations" />
-                            <p className="text-center">You have no reservations</p>
+                            <p className="text-center">{t("reservationPanel_noReservations")}</p>
                             <div className="mt-3 text-center">
-                                <button onClick={showCreate} className="btn btn-primary">Create reservation</button>
+                                <button onClick={showCreate} className="btn btn-primary">{t("reservationPanel_createReservation")}</button>
                             </div>
                         </>
                         :
                         <>
                             <div className="mt-3">
-                                <button onClick={showCreate} className="btn btn-primary">Create reservation</button>
+                                <button onClick={showCreate} className="btn btn-primary">{t("reservationPanel_createReservation")}</button>
                             </div>
                             <Reservations reservations={reservations} fetchReservations={fetchReservations} />
                         </>
