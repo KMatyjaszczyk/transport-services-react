@@ -2,9 +2,12 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import Vehicle from "./Vehicle"
+import "../i18n"
+import { useTranslation } from "react-i18next";
 
 const Vehicles = () => {
     const [vehicles, setVehicles] = useState([])
+    const { t } = useTranslation()
 
     const fetchVehicles = async () => {
         const url = '/vehicles'
@@ -13,7 +16,7 @@ const Vehicles = () => {
                 setVehicles(response.data)
             })
             .catch((error) => {
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
     }

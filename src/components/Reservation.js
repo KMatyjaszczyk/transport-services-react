@@ -5,9 +5,12 @@ import { FaTrashAlt, FaPencilAlt, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import UpdateReservationModal from "./UpdateReservationModal";
+import "../i18n"
+import { useTranslation } from "react-i18next";
 
 const Reservation = ({ reservation, fetchReservations }) => {
     const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false)
+    const { t } = useTranslation()
 
     const showUpdate = () => {
         setUpdateModalIsOpen(true)
@@ -33,19 +36,19 @@ const Reservation = ({ reservation, fetchReservations }) => {
 
         await axios.put(url, null, config)
             .then((response) => {
-                toast.success('Reservation cancelled')
+                toast.success(t("toast_cancelReservation"))
                 fetchReservations()
             })
             .catch((error) => {
                 console.log(error)
                 if (error.response.status === 403) {
-                    toast.error('User is not logged in')
+                    toast.error(t("toast_userNotLoggedIn"))
                     localStorage.removeItem('token')
                     navigate('/login')
                     return
                 }
 
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
     }
@@ -61,19 +64,19 @@ const Reservation = ({ reservation, fetchReservations }) => {
 
         await axios.delete(url, config)
             .then((response) => {
-                toast.success('Reservation deleted')
+                toast.success(t("toast_deleteReservation"))
                 fetchReservations()
             })
             .catch((error) => {
                 console.log(error)
                 if (error.response.status === 403) {
-                    toast.error('User is not logged in')
+                    toast.error(t("toast_userNotLoggedIn"))
                     localStorage.removeItem('token')
                     navigate('/login')
                     return
                 }
 
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
     }

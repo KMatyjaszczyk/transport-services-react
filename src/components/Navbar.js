@@ -38,7 +38,7 @@ const Navbar = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
     const handleLogout = () => {
         localStorage.removeItem('token')
         setUserIsLoggedIn(!userIsLoggedIn)
-        toast.success('User logged out')
+        toast.success(t("toast_login_userLoggedOut"))
         navigate('/login')
     }
 

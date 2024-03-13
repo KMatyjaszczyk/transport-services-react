@@ -41,13 +41,13 @@ const ReservationPanel = () => {
             .catch((error) => {
                 console.log(error)
                 if (error.response.status === 403) {
-                    toast.error('User is not logged in')
+                    toast.error(t("toast_userNotLoggedIn"))
                     localStorage.removeItem('token')
                     navigate('/login')
                     return
                 }
 
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
     }

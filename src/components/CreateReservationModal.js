@@ -28,7 +28,7 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
                 setVehicles(response.data)
             })
             .catch((error) => {
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
     }
@@ -62,7 +62,7 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
         
         await axios.post(url, requestBody, config)
             .then((response) => {
-                toast.success('Reservation created')
+                toast.success(t("toast_createReservation_created"))
 
                 setCustomerName('')
                 setVehicleId('1')
@@ -77,13 +77,13 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
             .catch((error) => {
                 console.log(error)
                 if (error.response.status === 403) {
-                    toast.error('User is not logged in')
+                    toast.error(t("toast_userNotLoggedIn"))
                     localStorage.removeItem('token')
                     navigate('/login')
                     return
                 }
 
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
     }
@@ -95,17 +95,17 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
         var result = ''
 
         if (!customerNamePattern.test(customerName)) {
-            result += 'Wrong customer name. '
+            result += t("toast_modifyReservation_wrongCustomerName")
         }
 
         if (!destinationPattern.test(destination)) {
-            result += 'Wrong destination. '
+            result += t("toast_modifyReservation_wrongDestination")
         }
 
         const date = moment(departureDate + ' ' + departureTime, 'YYYY-MM-DD HH:mm').toDate()
         const currentDate = new Date()
         if (date < currentDate) {
-            result += 'Cannot create reservation for the past. '
+            result += t("toast_modifyReservation_wrongDateFromThePast")
         }
 
         return result

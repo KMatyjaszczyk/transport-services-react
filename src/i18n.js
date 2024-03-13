@@ -72,6 +72,21 @@ i18next
                     , createReservationModal_create: "Create"
                     , updateReservationModal_title: "Update reservation"
                     , updateReservationModal_update: "Update"
+                    , toast_createReservation_created: "Reservation created"
+                    , toast_updateReservation_updated: "Reservation updated"
+                    , toast_cancelReservation: "Reservation cancelled"
+                    , toast_deleteReservation: "Reservation deleted"
+                    , toast_userNotLoggedIn: "User is not logged in"
+                    , toast_unknownError: "Unknown error"
+                    , toast_modifyReservation_wrongCustomerName: "Wrong customer name. "
+                    , toast_modifyReservation_wrongDestination: "Wrong destination. "
+                    , toast_modifyReservation_wrongDateFromThePast: "Cannot create reservation for the past. "
+                    , toast_register_registered: "User successfully registered"
+                    , toast_register_wrongEmail: "Wrong email address. "
+                    , toast_register_passwordTooShort: "Password is too short. "
+                    , toast_register_passwordDoesNotRepeat: "Password does not match the repeated. "
+                    , toast_login_userLoggedIn: "User logged in"
+                    , toast_login_userLoggedOut: "User logged out"
                 }
             },
             pl: {
@@ -138,6 +153,21 @@ i18next
                     , createReservationModal_create: "Utwórz"
                     , updateReservationModal_title: "Aktualizuj rezerwację"
                     , updateReservationModal_update: "Aktualizuj"
+                    , toast_createReservation_created: "Utworzono rezerwację"
+                    , toast_updateReservation_updated: "Zaktualizowano rezerwację"
+                    , toast_cancelReservation: "Anulowano rezerwację"
+                    , toast_deleteReservation: "Usunięto rezerwację"
+                    , toast_userNotLoggedIn: "Użytkownik nie jest zalogowany"
+                    , toast_unknownError: "Nieznany błąd"
+                    , toast_modifyReservation_wrongCustomerName: "Niewłaściwa nazwa klienta. "
+                    , toast_modifyReservation_wrongDestination: "Niewłaściwy cel podróży. "
+                    , toast_modifyReservation_wrongDateFromThePast: "Nie można utworzyć rezerwacji w przeszłości. "
+                    , toast_register_registered: "Zarejestrowano użytkownika"
+                    , toast_register_wrongEmail: "Niepoprawny adres email. "
+                    , toast_register_passwordTooShort: "Hasło jest za krótkie. "
+                    , toast_register_passwordDoesNotRepeat: "Hasła różnią się od siebie. "
+                    , toast_login_userLoggedIn: "Zalogowano użytkownika"
+                    , toast_login_userLoggedOut: "Wylogowano użytkownika"
                 }
             }
         }

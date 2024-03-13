@@ -27,12 +27,12 @@ const Register = () => {
 
         await axios.post(url, requestBody)
             .then((response) => {
-                const message = `User with email ${email} succesfully registered`
+                const message = t("toast_register_registered")
                 toast.success(message)
                 navigate('/login')
             })
             .catch((error) => {
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
     }
@@ -43,15 +43,15 @@ const Register = () => {
         var result = ''
 
         if (!emailPattern.test(email)) {
-            result += ('Wrong email address. ')
+            result += t("toast_register_wrongEmail")
         }
 
         if (password.length < minPasswordLength) {
-            result += ('Password is too short. ')
+            result += t("toast_register_passwordTooShort")
         }
 
         if (password !== repeatedPassword) {
-            result += ('Password does not match the repeated. ')
+            result += t("toast_register_passwordDoesNotRepeat")
         }
 
         return result

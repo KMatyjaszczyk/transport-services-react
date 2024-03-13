@@ -23,11 +23,11 @@ const Login = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
                 const token = response.data.jwt
                 localStorage.setItem('token', token)
                 setUserIsLoggedIn(!userIsLoggedIn)
-                toast.success('User logged in')
+                toast.success(t("toast_login_userLoggedIn"))
                 navigate('/about')
             })
             .catch((error) => { 
-                const message = error.response.data.message ? error.response.data.message : 'Unknown error'
+                const message = error.response.data.message ? error.response.data.message : t("toast_unknownError")
                 toast.error(message)
             })
         
