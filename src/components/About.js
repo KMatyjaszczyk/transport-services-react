@@ -1,6 +1,7 @@
 import Vehicles from "./Vehicles"
 import "../i18n"
 import { useTranslation } from "react-i18next";
+import Carousel from "./Carousel";
 
 const About = () => {
     const { t } = useTranslation()
@@ -18,9 +19,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <div className="py-5" style={{ backgroundImage: `url('img/sekcja1.jpg'`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                <div style={{ height: 20 + 'rem' }}></div>
-            </div>
+            <Carousel></Carousel>
             <section className="py-5">
                 <div className="container my-5">
                     <div className="row justify-content-center">
@@ -33,7 +32,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <div className="py-5" style={{ backgroundImage: `url('img/sekcja2.jpg'`, backgroundSize: "cover", backgroundPosition: "center" }}>
+            <div className="py-5" style={{ backgroundImage: `url('img/section1.jpg')`, backgroundSize: "cover", backgroundPosition: "center" }}>
                 <div style={{ height: 20 + 'rem' }}></div>
             </div>
             <section className="py-5">
@@ -49,7 +48,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <div className="py-5" style={{ backgroundImage: `url('img/sekcja3.jpg'`, backgroundSize: "cover", backgroundPosition: "center" }}>
+            <div className="py-5" style={{ backgroundImage: `url('img/section2.jpg')`, backgroundSize: "cover", backgroundPosition: "center" }}>
                 <div style={{ height: 20 + 'rem' }}></div>
             </div>
             <section className="py-5">
