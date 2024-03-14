@@ -23,7 +23,7 @@ const Vehicles = () => {
 
     useEffect(() => {
         fetchVehicles()
-    }, [])
+    })
 
     return (
         <ul className="list-group my-2">

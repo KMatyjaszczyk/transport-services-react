@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { useTranslation } from "react-i18next"
 
@@ -9,25 +9,14 @@ const arrayOfLanguages = [
 
 export default function LanguageDropdown() {
     const [language, setLanguage] = useState('pl');
-    const { t, i18n } = useTranslation()
+    const { i18n } = useTranslation()
 
     useEffect(() => {
         modifyLanguage(language);
-    }, []);
+    })
 
     function modifyLanguage(language) {
-        // localStorage.setItem('lang', language)
         i18n.changeLanguage(language).then(r => {})
-    }
-
-    let storedLanguage = i18n.resolvedLanguage ? i18n.resolvedLanguage : null
-
-    function getPreferredLanguage() {
-        if (storedLanguage) {
-            return storedLanguage;
-        }
-
-        return 'en';
     }
 
     function setPreferredLanguage(language) {
