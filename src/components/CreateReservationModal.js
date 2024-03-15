@@ -35,7 +35,7 @@ const CreateReservationModal = ({ createModalIsOpen, hideCreate, fetchReservatio
 
     useEffect(() => {
         fetchVehicles()
-    })
+    }, [])
 
     const handleCreateReservation = async () => {
         const validationResult = validateForm()

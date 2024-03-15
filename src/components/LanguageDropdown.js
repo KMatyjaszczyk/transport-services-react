@@ -13,7 +13,7 @@ export default function LanguageDropdown() {
 
     useEffect(() => {
         modifyLanguage(language);
-    })
+    }, [])
 
     function modifyLanguage(language) {
         i18n.changeLanguage(language).then(r => {})

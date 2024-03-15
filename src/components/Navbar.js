@@ -13,7 +13,7 @@ const Navbar = ({ userIsLoggedIn, setUserIsLoggedIn }) => {
 
     useEffect(() => {
         validateToken()
-    })
+    }, [])
 
     const validateToken = async () => {
         const token = localStorage.getItem('token')
